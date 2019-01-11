@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', 'DashboardController@index');
+
 
 // Route::post('');
 
@@ -36,6 +38,8 @@ Route::get('/profiles/edit', 'UserProfilesController@edit');
 // Should method be PUT or POST?
 Route::put('/profiles/edit/submit', 'UserProfilesController@update');
 
+Route::get('/profiles/{id}', 'UserProfilesController@show');
+
 
 // Route::get('/preferences/account', '');
 
@@ -43,4 +47,4 @@ Route::put('/profiles/edit/submit', 'UserProfilesController@update');
 // Route::get('/members/search', '');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('listings', 'ListingsController');
