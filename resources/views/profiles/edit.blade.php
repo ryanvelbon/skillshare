@@ -1,7 +1,14 @@
-<form method="POST" action="route('profiles.edit', $user)">
+@extends('layouts.app')
 
-	<input type="text" name="city" value="{{ $user->profile->city }}" />
+@section('content')
+	<a href="btn btn-default" href="/">Go Back</a>
 
-	<button type="submit">Send</button>
-	
-</form>
+	<h1>Edit Profile</h1>
+	<!-- any need to pass id with update invocation?? -->
+	{!! Form::open(['action' => ['UserProfilesController@update'], 'method' => 'POST']) !!}
+		{{ Form::bsDate('date_of_birth', $user->date_of_birth) }}
+		{{ Form::bsText('city', $user->profile->city) }}
+		{{ Form::hidden('_method', 'PUT') }}
+		{{ Form::bsSubmit('Submit', ['class' => 'btn btn-primary']) }}
+	{!! Form::close() !!}
+@endsection

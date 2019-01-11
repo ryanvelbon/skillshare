@@ -28,6 +28,15 @@ Route::get('/', function () {
 Route::get('/profiles/edit', 'UserProfilesController@edit');
 
 
+
+//
+// Route::resource('/profiles', 'UserProfilesController');
+
+
+// Should method be PUT or POST?
+Route::put('/profiles/edit/submit', 'UserProfilesController@update');
+
+
 // Route::get('/preferences/account', '');
 
 // Route::get('/groups', '');

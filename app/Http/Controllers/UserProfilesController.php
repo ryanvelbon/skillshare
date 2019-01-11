@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\UserProfile;
+use DB;
 
 class UserProfilesController extends Controller
 {
@@ -69,20 +71,26 @@ class UserProfilesController extends Controller
         $user = auth()->user();
 
         return view('profiles.edit')->with('user', $user);
-
-        // return $user->username;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user_id = auth()->user()->id;
+
+        $profile = UserProfile::where('user_id', $user_id)->first();
+
+        $profile->date_of_birth = $request->input('date_of_birth');
+        $profile->city = $request->input('city');
+
+        $profile->save();
+
+        return redirect('/')->with('success', 'Your Profile has been Updated.');
     }
 
     /**

@@ -16,4 +16,6 @@ class UserProfile extends Model
     }
 
     public $timestamps = false;
+    // public $incrementing = false;
+    // protected $primaryKey = 'user_id'; // actually user_id cannot be made PK because it's a FK
 }
