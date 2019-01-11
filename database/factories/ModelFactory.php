@@ -22,3 +22,22 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Location::class, function (Faker\Generator $faker) {
+	return [
+		'city' => $faker->city,
+		'state' => $faker->state,
+		'zip' => $faker->postcode,
+	];
+});
+
+$factory->define(App\Listing::class, function (Faker\Generator $faker) {
+	return [
+		'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'description' => $faker->sentence($nbWords = 50, $variableNbWords = true),
+        'paid' => True,
+        'user_id' => App\User::inRandomOrder()->first()->id,
+        'skill_id' => App\Skill::inRandomOrder()->first()->id,
+        'location_id' => App\Location::inRandomOrder()->first()->id,
+	];
+});

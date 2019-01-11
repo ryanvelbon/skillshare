@@ -16,9 +16,14 @@ class CreateListingsTable extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('description');
+            $table->string('description', 500);
             $table->boolean('paid');
-            // FKs: location_id, user_id, skill_id
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('skill_id');
+            $table->unsignedInteger('location_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->timestamps();
         });
     }
