@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ListingsController@index');
 
 Route::get('/dashboard', 'DashboardController@index');
 
@@ -48,3 +46,7 @@ Route::get('/profiles/{id}', 'UserProfilesController@show');
 Auth::routes();
 
 Route::resource('listings', 'ListingsController');
+
+
+Route::get('/dashboard/projects', 'DashboardController@projects');
+// Route::get('/messages', );
