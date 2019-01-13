@@ -36,4 +36,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Listing');
     }
+
+    public function interests(){
+        return $this->belongsToMany('App\Topic');
+    }
+
+    public function skills(){
+        return $this->belongsToMany('App\Skill');
+    }
 }

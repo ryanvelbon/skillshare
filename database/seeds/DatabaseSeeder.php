@@ -22,10 +22,14 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(LocationsTableSeeder::class);
+        $this->call(CraftsTableSeeder::class);
         $this->call(SkillsTableSeeder::class);
+        $this->call(TopicsTableSeeder::class);
 
         $this->call(UsersTableSeeder::class);
         $this->call(ListingsTableSeeder::class);
+
+        // Where is seeding done for these tables: UserSkills, UserTopics, ListingSkills, ListingTopics ?
 
         Model::reguard();
     }

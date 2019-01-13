@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Listing;
-use App\Skill;
+use App\Craft;
 use App\Location;
 
 class ListingsController extends Controller
@@ -32,9 +32,9 @@ class ListingsController extends Controller
      */
     public function create()
     {
-        $skills = Skill::all();
+        $crafts = Craft::all();
         $locations = Location::all();
-        return view('listings.create')->with('skills', $skills)->with('locations', $locations);
+        return view('listings.create')->with('crafts', $crafts)->with('locations', $locations);
     }
 
     /**
@@ -57,8 +57,7 @@ class ListingsController extends Controller
         $listing->paid = $request->has('paid');
 
         $listing->user_id = auth()->user()->id;
-        // $listing->skill_id = (int)$request->input('skill_id');
-        $listing->skill_id = (int)$request->input('skill');
+        $listing->craft_id = (int)$request->input('craft');
         $listing->location_id = (int)$request->input('location');
 
         $listing->save();

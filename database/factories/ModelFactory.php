@@ -37,7 +37,7 @@ $factory->define(App\Listing::class, function (Faker\Generator $faker) {
         'description' => $faker->sentence($nbWords = 50, $variableNbWords = true),
         'paid' => True,
         'user_id' => App\User::inRandomOrder()->first()->id,
-        'skill_id' => App\Skill::inRandomOrder()->first()->id,
+        'craft_id' => App\Craft::inRandomOrder()->first()->id,
         'location_id' => App\Location::inRandomOrder()->first()->id,
 	];
 });

@@ -19,10 +19,10 @@ class CreateListingsTable extends Migration
             $table->string('description', 500);
             $table->boolean('paid');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('skill_id');
+            $table->unsignedInteger('craft_id');
             $table->unsignedInteger('location_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('craft_id')->references('id')->on('crafts');
             $table->foreign('location_id')->references('id')->on('locations');
             $table->timestamps();
         });

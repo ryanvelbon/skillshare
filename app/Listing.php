@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     protected $fillable = [
-        'skill_id', 'location_id',
+        'craft_id', 'location_id',
     ];
 
     public function user(){
     	return $this->belongsTo('App\User');
     }
 
-    public function skill()
+    public function craft()
     {
-        return $this->hasOne('App\Skill');
+        return $this->hasOne('App\Craft');
     }
 
     public function location()
@@ -24,11 +24,11 @@ class Listing extends Model
         return $this->hasOne('App\Location');
     }
 
-    public function skillTags(){
-        return $this->hasMany('App\SkillTag');
+    public function topics(){
+        return $this->belongsToMany('App\Topic');
     }
 
-    public function subjectTags(){
-        return $this->hasMany('App\SubjectTag');
+    public function skills(){
+        return $this->belongsToMany('App\Skill');
     }
 }

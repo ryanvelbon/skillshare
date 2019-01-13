@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SkillsTableSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class SkillsTableSeeder extends Seeder
     {
         DB::table('skills')->delete();
 
-        $skills = array('Animation', 'Video Editing', 'Music Production', 'Guitar', 'Graphic Design');
+        $skills = array('Python', 'Java', 'C++', 'Ableton', 'Cubase', 'Adobe After Effects', 'Photoshop');
 
         foreach($skills as $skill){
             DB::table('skills')->insert([
