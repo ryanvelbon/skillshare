@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/bootstrap', function(){
+	return view('_test.overallDesign');
+});
+
 Route::get('/', 'ListingsController@index');
 
 Route::get('/dashboard', 'DashboardController@index');

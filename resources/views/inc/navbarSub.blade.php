@@ -19,7 +19,7 @@
         <li class="{{Request::is('dashboard/projects') ? 'active' : ''}}"><a href="/dashboard/projects">My Projects</a></li>
         <li class="{{Request::is('events') ? 'active' : ''}}"><a href="/events">Events</a></li>
         <li class="{{Request::is('groups') ? 'active' : ''}}"><a href="/groups">Groups</a></li>
-        <a href="/listings/create" class="btn btn-primary navbar-btn" role="button">Start a Collab</a>
+        <a href="/listings/create" class="btn btn-primary navbar-btn" role="button">Add a Listing</a>
 
       </ul>
     </div><!--/.nav-collapse -->
