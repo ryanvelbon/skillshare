@@ -19,6 +19,8 @@ class CreateListingTopicTable extends Migration
 
             $table->unsignedInteger('topic_id');
             $table->foreign('topic_id')->references('id')->on('topics');
+
+            $table->unique(array('listing_id', 'topic_id'));
         });
     }
 

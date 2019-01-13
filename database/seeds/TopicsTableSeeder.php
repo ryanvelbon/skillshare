@@ -13,7 +13,7 @@ class TopicsTableSeeder extends Seeder
     {
         DB::table('topics')->delete();
 
-        $topics = array('Animation', 'Video Editing', 'Music Production', 'Guitar', 'Graphic Design');
+        $topics = array('Economics', 'Social Darwinism', 'Libertarianism', 'MAGA', 'MGTOW', 'Jordan Peterson', 'Ben Shapiro', 'Fascism', 'Fascwave', 'Julius Evola', 'AnCap', 'Survival of the Fittest');
 
         foreach($topics as $topic){
             DB::table('topics')->insert([
