@@ -15,19 +15,39 @@
 </head>
 <body>
     <div id="app">
-        {{--@include('inc.navbar')
-        @include('inc.navbarSub')--}}
+
+        @include('inc.navbar')
+
+        @include('inc.navbarSub')
 
         <div class="container">
             <div class="row">
+
+                <!-- LEFT COLUMN -->
                 <div class="col-md-2 col-lg-2">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Filters</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Skill Required<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Music</li>
+                                    <li><a href="#">Music Production</a></li>
+                                    <li><a href="#">Guitar</a></li>
+                                    <li><a href="#">Mixing & Mastering</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Video</li>
+                                    <li><a href="#">Film Editing</a></li>
+                                    <li><a href="#">Animation</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- MIDDLE COLUMN----------------------------------------------------------------------- -->
                 <div class="col-md-6 col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -48,19 +68,7 @@
                                 </form>
                                 <br>
 
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Skill Required<span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-header">Music</li>
-                                        <li><a href="#">Music Production</a></li>
-                                        <li><a href="#">Guitar</a></li>
-                                        <li><a href="#">Mixing & Mastering</a></li>
-                                        <li class="divider"></li>
-                                        <li class="dropdown-header">Video</li>
-                                        <li><a href="#">Film Editing</a></li>
-                                        <li><a href="#">Animation</a></li>
-                                    </ul>
-                                    </div>
+                                
                             </div>
 
                             <!-- LISTINGS--------------------------------------------------------------------------------------- -->
@@ -96,36 +104,79 @@
                     </div>
                 </div>
 
-                 <div class="col-md-4 col-lg-4"> <!--LEFT ------------------------------------------------------- -->
+                <!-- RIGHT COLUMN---------------------------------------------------------------------------- -->
+                <div class="col-md-4 col-lg-4">
+
+                    <!-- MY PROFILE ----------------------------------------------------------------------------- -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3>My Profile</h3>
                         </div>
                         <div class="panel-body">
-                          <div class="panel-group">
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Events</div>
-                              <div class="panel-body">Panel Content</div>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#prof_menu1"><i class="glyphicon glyphicon-pushpin"></i></a></li>
+                                <li><a data-toggle="tab" href="#prof_menu2"><i class="glyphicon glyphicon-folder-open"></i></a></li>
+                                <li><a data-toggle="tab" href="#prof_menu3"><i class="glyphicon glyphicon-calendar"></i></a></li>
+                                <li><a data-toggle="tab" href="#prof_menu4"><i class="glyphicon glyphicon-">?</i></a></li>
+                                <li><a data-toggle="tab" href="#prof_menu5"><i class="glyphicon glyphicon-">?</i></a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="prof_menu1" class="tab-pane fade in active">
+                                    <h3>My Listings</h3>
+                                    
+                                </div>
+                                <div id="prof_menu2" class="tab-pane fade">
+                                    <h3>My Collabs</h3>
+                                </div>
+                                <div id="prof_menu3" class="tab-pane fade">
+                                    <h3>My Calendar</h3>
+                                </div>
+                                <div id="prof_menu4" class="tab-pane fade">
+                                    <h3>My Groups</h3>
+                                </div>
+                                <div id="prof_menu5" class="tab-pane fade">
+                                    <h3>Friends</h3>
+                                </div>
                             </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Listings</div>
-                              <div class="panel-body">Panel Content</div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Projects</div>
-                              <div class="panel-body">Panel Content</div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Groups</div>
-                              <div class="panel-body">Panel Content</div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Friends</div>
-                              <div class="panel-body">Panel Content</div>
-                            </div>
-                          </div>
                         </div>
                     </div>
+
+                    <!-- DISCOVER -------------------------------------------------------------------------------- -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Suggestions</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#disc_menu1"><i class="glyphicon glyphicon-pushpin"></i></a></li>
+                                <li><a data-toggle="tab" href="#disc_menu2"><i class="glyphicon glyphicon-folder-open"></i></a></li>
+                                <li><a data-toggle="tab" href="#disc_menu3"><i class="glyphicon glyphicon-glass"></i></a></li>
+                                <li><a data-toggle="tab" href="#disc_menu4"><i class="glyphicon glyphicon-">?</i></a></li>
+                                <li><a data-toggle="tab" href="#disc_menu5"><i class="glyphicon glyphicon-">?</i></a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="disc_menu1" class="tab-pane fade in active">
+                                    <h3>Recent Listings</h3>
+                                    
+                                </div>
+                                <div id="disc_menu2" class="tab-pane fade">
+                                    <h3>Projects</h3>
+                                </div>
+                                <div id="disc_menu3" class="tab-pane fade">
+                                    <h3>Events</h3>
+                                </div>
+                                <div id="disc_menu4" class="tab-pane fade">
+                                    <h3>Groups</h3>
+                                </div>
+                                <div id="disc_menu5" class="tab-pane fade">
+                                    <h3>Friends</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OF RIGHT COLUMN -->
                 </div>
             </div>
         </div>
