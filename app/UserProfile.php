@@ -15,6 +15,10 @@ class UserProfile extends Model
     	return $this->belongsTo('App\User');
     }
 
+    public function interests(){
+        return $this->hasMany('App\Topic');
+    }
+
     public $timestamps = false;
     // public $incrementing = false;
     // protected $primaryKey = 'user_id'; // actually user_id cannot be made PK because it's a FK

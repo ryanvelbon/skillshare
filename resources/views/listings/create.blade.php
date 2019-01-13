@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('centre')
 <div class="row">
 	<div class="panel panel-default"></div>
 		<div class="panel-heading">Add a Listing<a href="/dashboard" class="pull-right btn btn-default btn-xs">Go Back</a></div>

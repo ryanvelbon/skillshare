@@ -23,4 +23,12 @@ class Listing extends Model
     {
         return $this->hasOne('App\Location');
     }
+
+    public function skillTags(){
+        return $this->hasMany('App\SkillTag');
+    }
+
+    public function subjectTags(){
+        return $this->hasMany('App\SubjectTag');
+    }
 }

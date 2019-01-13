@@ -12,7 +12,7 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="{{Request::is('/') ? 'active' : ''}}"><a href="/">Home</a></li>
-        <li class="{{Request::is('about') ? 'active' : ''}}"><a href="/about">About</a></li>
+        <li class="{{Request::is('listings') ? 'active' : ''}}"><a href="/listings">Listings</a></li>
         
 
         <li class="{{Request::is('messages') ? 'active' : ''}}"><a href="/messages">Inbox</a></li>

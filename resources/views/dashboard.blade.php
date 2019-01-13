@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('content')
+@section('left')
+@endsection
+
+@section('centre')
 <div class="panel panel-default">
     <div class="panel-heading">Dashboard</div>
 
@@ -14,4 +17,9 @@
         You are logged in!
     </div>
 </div>
+@endsection
+
+@section('right')
+	@include('inc.myprofile')
+	@include('inc.suggestions')
 @endsection
