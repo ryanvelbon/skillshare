@@ -16,22 +16,12 @@ class ListingsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $listings = Listing::orderBy('created_at', 'desc')->get();
         return view('listings.index')->with('listings', $listings);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $crafts = Craft::all();
@@ -45,12 +35,6 @@ class ListingsController extends Controller
                     ->with('locations', $locations);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -70,15 +54,25 @@ class ListingsController extends Controller
 
         $listing->save();
 
-        return redirect('/dashboard')->with('success', 'Listing Added');
+        // save topics in listing_topic pivot table
+
+        $topics_as_titles = explode(',', $request->input('topics'));
+
+        foreach($topics_as_titles as $topic_title){
+            $listing->topics()->attach(Topic::where('title', $topic_title)->first()->id);
+        }
+
+        // save skills in listing_skill pivot table
+
+        $skills_as_titles = explode(',', $request->input('skills'));
+
+        foreach($skills_as_titles as $skill_title){
+            $listing->skills()->attach(Skill::where('title', $skill_title)->first()->id);
+        }
+
+        return redirect('/listings')->with('success', 'Listing Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $listing = Listing::find($id);
@@ -90,36 +84,17 @@ class ListingsController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $listing = Listing::find($id);
         return view('listings.edit')->with('listing', $listing);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $listing = Listing::find($id);
