@@ -15,10 +15,16 @@ class CreateTopicUserTable extends Migration
     {
         Schema::create('topic_user', function (Blueprint $table) {
             $table->unsignedInteger('topic_id');
-            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('topic_id')
+                  ->references('id')
+                  ->on('topics')
+                  ->onDelete('cascade');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

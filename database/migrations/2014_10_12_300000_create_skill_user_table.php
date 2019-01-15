@@ -15,10 +15,16 @@ class CreateSkillUserTable extends Migration
     {
         Schema::create('skill_user', function (Blueprint $table) {
             $table->unsignedInteger('skill_id');
-            $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('skill_id')
+                  ->references('id')
+                  ->on('skills')
+                  ->onDelete('cascade');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

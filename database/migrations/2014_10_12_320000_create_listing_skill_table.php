@@ -15,10 +15,16 @@ class CreateListingSkillTable extends Migration
     {
         Schema::create('listing_skill', function (Blueprint $table) {
             $table->unsignedInteger('listing_id');
-            $table->foreign('listing_id')->references('id')->on('listings');
+            $table->foreign('listing_id')
+                  ->references('id')
+                  ->on('listings')
+                  ->onDelete('cascade');
 
             $table->unsignedInteger('skill_id');
-            $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('skill_id')
+                  ->references('id')
+                  ->on('skills')
+                  ->onDelete('cascade');
         });
     }
 

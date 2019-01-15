@@ -27,9 +27,12 @@ class DatabaseSeeder extends Seeder
         $this->call(TopicsTableSeeder::class);
 
         $this->call(UsersTableSeeder::class);
-        $this->call(ListingsTableSeeder::class);
+        $this->call(SkillUserTableSeeder::class);
+        $this->call(TopicUserTableSeeder::class);
 
-        // Where is seeding done for these tables: UserSkills, UserTopics, ListingSkills, ListingTopics ?
+        $this->call(ListingsTableSeeder::class);
+        $this->call(ListingSkillTableSeeder::class);
+        $this->call(ListingTopicTableSeeder::class);
 
         Model::reguard();
     }
