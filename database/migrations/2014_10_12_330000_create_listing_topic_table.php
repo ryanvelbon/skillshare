@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateListingTopicTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('listing_topic', function (Blueprint $table) {
@@ -30,11 +25,6 @@ class CreateListingTopicTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('listing_topic');

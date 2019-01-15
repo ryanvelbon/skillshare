@@ -12,7 +12,7 @@
 */
 
 Route::get('/bootstrap', function(){
-	return view('_test.overallDesign');
+	return view('_test.tagging');
 });
 
 // Route::get('/', 'ListingsController@index');

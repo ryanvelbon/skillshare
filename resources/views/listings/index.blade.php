@@ -37,25 +37,35 @@
             <div class="well">
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2 text-primary">Animation</strong><span class="text-muted"><i class="glyphicon glyphicon-map-marker"></i><em> Phoenix, AZ</em></span>
+                    <strong class="d-inline-block mb-2 text-primary">
+                        {{App\Craft::find($listing->craft_id)->title}}
+                    </strong>
+                    <span class="text-muted"><i class="glyphicon glyphicon-map-marker"></i>
+                        <em>{{App\Location::find($listing->location_id)->city}}</em>
+                        <strong>{{App\Location::find($listing->location_id)->state}}</strong>
+                    </span>
                     <h4 class="mb-0">
-                        <a class="text-dark" href="#">Music Video - Jordan Peterson - Responsibility</a>
+                        <a class="text-dark" href="#">{{$listing->title}}</a>
                     </h4>
 
-                    <span class="text-primary">$500</span>
+                    @if($listing->paid)
+                        <span class="label label-success">Paid Work</span>
+                    @else
+                        <span class="label label-default">Voluntary</span>
+                    @endif
 
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                    <span class="label label-info">Adobe After Effects</span>
-                    <span class="label label-info">Photoshop</span>
-                    <span class="label label-info">Jordan Peterson</span>
-                    <span class="label label-info">Masculinity</span>
-                    <span class="label label-info">Effects</span>
-                    <span class="label label-info">Photoshop</span>
-                    <span class="label label-info">Jordan Peterson</span>
-                    <span class="label label-info">Masculinity</span>
+                    <p class="card-text mb-auto">{{$listing->description}}</p>
+
+                    @foreach($listing->topics as $topic)
+                        <span class="label label-warning">{{$topic->title}}</span>
+                    @endforeach
+                    @foreach($listing->skills as $skill)
+                        <span class="label label-primary">{{$skill->title}}</span>
+                    @endforeach
 
                     <br>
-                    <button type="button" class="btn btn-primary pull-right">View Listing</button>
+                    <a href="{{ url('/listings', $listing->id) }}" class="btn btn-success btn-lg pull-right">View Listing</a>
+
                     <br>    
 
 

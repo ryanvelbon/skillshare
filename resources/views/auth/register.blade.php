@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('centre')
 <div class="panel panel-default">
     <div class="panel-heading">Register</div>
 

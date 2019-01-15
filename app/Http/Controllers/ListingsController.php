@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Listing;
 use App\Craft;
+use App\Skill;
+use App\Topic;
 use App\Location;
 
 class ListingsController extends Controller
@@ -33,8 +35,14 @@ class ListingsController extends Controller
     public function create()
     {
         $crafts = Craft::all();
+        $skills = Skill::all();
+        $topics = Topic::all();
         $locations = Location::all();
-        return view('listings.create')->with('crafts', $crafts)->with('locations', $locations);
+        return view('listings.create')
+                    ->with('crafts', $crafts)
+                    ->with('skills', $skills)
+                    ->with('topics', $topics)
+                    ->with('locations', $locations);
     }
 
     /**

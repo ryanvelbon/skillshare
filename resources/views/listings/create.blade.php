@@ -11,10 +11,10 @@
 
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            	<label for="skill">What skill are you looking for?</label>
-				<select class="form-control" name="skill" id="skill">
-					@foreach($skills as $skill)
-						<option value="{{$skill->id}}">{{$skill->title}}</option>
+            	<label for="craft">What craft are you looking for?</label>
+				<select class="form-control" name="craft" id="craft">
+					@foreach($crafts as $craft)
+						<option value="{{$craft->id}}">{{$craft->title}}</option>
 					@endforeach
 				</select>
 
@@ -32,10 +32,16 @@
 				<textarea class="form-control" type="textbox" name="description" id="description"></textarea>
 
 				<label for="paid">Paid</label>
-				<input class="form-control" type="checkbox" name="paid" id="paid">		
+				<input class="form-control" type="checkbox" name="paid" id="paid">
+
+
 
 				<input type="submit" value="Submit">
             </form>          
         </div>
 </div>
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('js/typeahead.js') }}"></script>
 @endsection

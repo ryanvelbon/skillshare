@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTopicUserTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('topic_user', function (Blueprint $table) {
@@ -25,14 +20,11 @@ class CreateTopicUserTable extends Migration
                   ->references('id')
                   ->on('users')
                   ->onDelete('cascade');
+
+            $table->unique(array('topic_id', 'user_id'));
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('topic_user');

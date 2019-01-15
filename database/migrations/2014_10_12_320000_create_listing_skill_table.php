@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateListingSkillTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('listing_skill', function (Blueprint $table) {
@@ -25,14 +20,11 @@ class CreateListingSkillTable extends Migration
                   ->references('id')
                   ->on('skills')
                   ->onDelete('cascade');
+
+            $table->unique(array('listing_id', 'skill_id'));
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('listing_skill');

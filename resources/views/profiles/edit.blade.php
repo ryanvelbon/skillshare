@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('centre')
 	<a href="btn btn-default" href="/">Go Back</a>
 
 	<h1>Edit Profile</h1>

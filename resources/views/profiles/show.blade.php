@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('centre')
 <h1>{{ $user->username }}</h1>
 
 <li>{{ $user->profile->city }}</li>
