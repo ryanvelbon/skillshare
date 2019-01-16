@@ -12,7 +12,7 @@
 */
 
 Route::get('/testing', function(){
-	return view('_test.tagging');
+	return view('_test.profileShow');
 });
 
 // Route::get('/', 'ListingsController@index');

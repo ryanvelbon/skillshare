@@ -13,7 +13,7 @@ class SkillsTableSeeder extends Seeder
     {
         DB::table('skills')->delete();
 
-        $skills = array('Python', 'Java', 'C++', 'Ableton', 'Cubase', 'Adobe After Effects', 'Photoshop');
+        $skills = array('Python', 'Java', 'C++', 'Ableton', 'Cubase', 'Adobe After Effects', 'Photoshop', 'SQL', 'Drums', 'Vocals', 'Violin', 'DJ', 'Mixing', 'Mastering');
 
         foreach($skills as $skill){
             DB::table('skills')->insert([

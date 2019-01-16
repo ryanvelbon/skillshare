@@ -14,7 +14,7 @@ class CraftsTableSeeder extends Seeder
     {
         DB::table('crafts')->delete();
 
-        $crafts = array('Animation', 'Video Editing', 'Music Production', 'Guitar', 'Graphic Design');
+        $crafts = array('Animation', 'Video Editing', 'Music Production', 'Guitar', 'Graphic Design', 'Software Developer', 'Web Developer', 'Web Design', 'Marketing', 'SEO');
 
         foreach($crafts as $craft){
             DB::table('crafts')->insert([

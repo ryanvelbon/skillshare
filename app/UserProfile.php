@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class UserProfile extends Model
 {
 	protected $fillable = [
-        'user_id', 'date_of_birth', 'city',
+        'user_id', 'date_of_birth', 'location_id',
     ];
 
     public function user()
     {
     	return $this->belongsTo('App\User');
+    }
+
+    public function location()
+    {
+        return $this->hasOne('App\Location');
     }
 
     public $timestamps = false;

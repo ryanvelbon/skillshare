@@ -36,7 +36,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/dashboard">Dashboard</a></li>
-                            <li><a href="#">My Profile</a></li>
+                            <li><a href="/profiles/{{ Auth::user()->id }}">My Profile</a></li>
                             <li><a href="#">Account & Settings</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
