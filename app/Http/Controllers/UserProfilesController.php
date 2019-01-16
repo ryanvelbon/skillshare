@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\UserProfile;
@@ -62,12 +63,24 @@ class UserProfilesController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $user = auth()->user();
 
         $profile = UserProfile::where('user_id', $user->id)->first();
 
         $profile->date_of_birth = $request->input('bday');
         $profile->location_id = $request->input('location');
+
+        // save profile pic
+
+        $filename = $user->id.'_profpic'.time().'.'.request()->profile_pic->getClientOriginalExtension();
+
+        Storage::disk('public')->put('profilepics/'.$filename, file_get_contents($request->profile_pic), 'public');
+
+        $profile->profile_pic = $filename;
 
         $profile->save();
 

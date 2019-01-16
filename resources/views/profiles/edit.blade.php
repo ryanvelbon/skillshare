@@ -11,7 +11,7 @@
 
 		<div class="panel-body">
 
-            <form method="post" action="{{ action('UserProfilesController@update') }}" accept-charset="UTF-8">
+            <form method="post" action="{{ action('UserProfilesController@update') }}" accept-charset="UTF-8" enctype="multipart/form-data">
 
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -32,6 +32,10 @@
 
 				<label for="skill-tags">What skills do you have?</label>
 				<input id="skill-tags" name="skills" type="text" value="" />
+
+				<br>
+
+				<input type="file" name="profile_pic" id="profile_pic">
 
 				<br>
 

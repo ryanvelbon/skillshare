@@ -20,6 +20,21 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3>{{ $user->username }}</h3>
+
+<div class="profile-header-container">
+    <div class="profile-header-img">
+
+    	<img height="100" width="100" src="{{asset('storage/profilepics/').'/'.$user->profile->profile_pic}}">
+
+        <div class="rank-label-container">
+            <span class="label label-default rank-label">{{$user->name}}</span>
+        </div>
+    </div>
+</div>
+
+
+
+
 		@if(request()->route('id') == Auth::user()->id)
 			<a href="/profiles/edit" class="btn btn-primary navbar-btn" role="button">Edit Profile</a>
 		@endif
@@ -54,6 +69,17 @@
               <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>
           </div>
+	</div>
+</div>
+@endsection
+
+@section('right')
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3>Portfolio</h3>
+	</div>
+	<div class="panel-body">
+		
 	</div>
 </div>
 @endsection
