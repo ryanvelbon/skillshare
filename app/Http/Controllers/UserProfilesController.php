@@ -24,7 +24,8 @@ class UserProfilesController extends Controller
 
     public function index()
     {
-        //
+        $members = User::all();
+        return view('profiles.index')->with('members', $members);
     }
 
     public function create()
@@ -117,8 +118,8 @@ class UserProfilesController extends Controller
     {
         $query = $request->input('search_query');
 
-        $result = User::where('username', 'LIKE', "%".$query."%")->get();
-        
-        return response()->json($result);
+        $members = User::where('username', 'LIKE', "%".$query."%")->get();
+
+        return view('profiles.index')->with('members', $members);
     }
 }

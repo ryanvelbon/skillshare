@@ -41,6 +41,7 @@ Route::get('/profiles/edit', 'UserProfilesController@edit');
 Route::put('/profiles/edit/submit', 'UserProfilesController@update');
 Route::get('/profiles/search', 'UserProfilesController@search')->name('profiles.search');
 Route::get('/profiles/{id}', 'UserProfilesController@show'); // careful with routing! This should be last route
+Route::get('/profiles', 'UserProfilesController@index')->name('profiles.index');
 
 
 // Route::get('/preferences/account', '');
@@ -54,5 +55,4 @@ Route::get('listings/search', 'ListingsController@search')->name('listings.searc
 Route::resource('listings', 'ListingsController');
 
 
-Route::get('/dashboard/projects', 'DashboardController@projects');
 // Route::get('/messages', );

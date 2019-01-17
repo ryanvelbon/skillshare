@@ -71,6 +71,7 @@ class ListingsController extends Controller
         }
 
         return redirect('/listings')->with('success', 'Listing Added');
+
     }
 
     public function show($id)
@@ -107,8 +108,10 @@ class ListingsController extends Controller
     {
         $query = $request->input('search_query');
 
-        $result = Listing::where('title', 'LIKE', "%".$query."%")->get();
+        $listings = Listing::where('title', 'LIKE', "%".$query."%")->get();
         
-        return response()->json($result);
+        // return response()->json($result);
+
+        return view('listings.index')->with('listings', $listings);
     }
 }

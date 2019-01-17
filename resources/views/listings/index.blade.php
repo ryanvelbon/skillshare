@@ -8,25 +8,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3>Listings</h3>
+        <a href="/listings/create" class="btn btn-primary navbar-btn" role="button">Add a Listing</a>
     </div>
     <div class="panel-body">
-        <div class="well">
-            <h3>Find a Listing</h3>
-            <hr>                                
-            <form>
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search phrase">
-                <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-              </div>
-            </form>
-            <br>
 
-            
-        </div>
-
-        @if (session('status'))
+        @if(session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>

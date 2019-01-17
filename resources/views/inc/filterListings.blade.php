@@ -1,6 +1,6 @@
 <div class="filter-widget panel panel-default">
     <div class="panel-heading">
-        <h3>Filters<i class="glyphicon glyphicon-filter"></i></h3>
+        <h3>Filtered Search<i class="glyphicon glyphicon-filter"></i></h3>
     </div>
     <div class="panel-body">
         <div class="dropdown">
