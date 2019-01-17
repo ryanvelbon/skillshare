@@ -47,6 +47,40 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
+
+    
+    <script> //This script is specifically for subnavbar
+        $(function(){
+            $("#search ul li").click(function(){
+
+                $("#search .dropdown-toggle").text($(this).text());
+                // $("#search .dropdown-toggle").val($(this).text());
+
+                switch($(this).text()){
+                    case "Explore":
+                        placeholderText = "Search everything";
+                        break;
+                    case "Find Listings":
+                        placeholderText = "Name or Description";
+                        break;
+                    case "Find Members":
+                        placeholderText = "Name or Username";
+                        break;
+                    case "Find Groups":
+                        placeholderText = "Name or keyword";
+                        break;
+                    case "Find Events":
+                        placeholderText = "Where?";
+                        break;
+                }
+
+                $("#search input").attr('placeholder', placeholderText);
+            });
+        });
+    </script>
+
+
+
     @yield('scripts')
 
 
