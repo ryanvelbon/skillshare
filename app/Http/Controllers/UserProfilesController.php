@@ -25,7 +25,18 @@ class UserProfilesController extends Controller
     public function index()
     {
         $members = User::all();
-        return view('profiles.index')->with('members', $members);
+        
+        $crafts = Craft::all();
+        $skills = Skill::all();
+        $topics = Topic::all();
+        $locations = Location::all();
+
+        return view('profiles.index')
+            ->with('members', $members)
+            ->with('crafts', $crafts)
+            ->with('skills', $skills)
+            ->with('topics', $topics)
+            ->with('locations', $locations);
     }
 
     public function create()
@@ -73,6 +84,9 @@ class UserProfilesController extends Controller
         $profile = UserProfile::where('user_id', $user->id)->first();
 
         $profile->date_of_birth = $request->input('bday');
+
+        $profile->craft_id = $request->input('craft');
+
         $profile->location_id = $request->input('location');
 
         // save profile pic

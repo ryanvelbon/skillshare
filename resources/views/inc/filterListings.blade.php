@@ -3,19 +3,7 @@
         <h3>Filtered Search<i class="glyphicon glyphicon-filter"></i></h3>
     </div>
     <div class="panel-body">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Skill Required<span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li class="dropdown-header">Music</li>
-                <li><a href="#">Music Production</a></li>
-                <li><a href="#">Guitar</a></li>
-                <li><a href="#">Mixing & Mastering</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Video</li>
-                <li><a href="#">Film Editing</a></li>
-                <li><a href="#">Animation</a></li>
-            </ul>
-        </div>
+        
         <br>
 
         <form action="/">

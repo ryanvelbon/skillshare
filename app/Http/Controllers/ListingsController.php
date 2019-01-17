@@ -19,7 +19,18 @@ class ListingsController extends Controller
     public function index()
     {
         $listings = Listing::orderBy('created_at', 'desc')->get();
-        return view('listings.index')->with('listings', $listings);
+        
+        $crafts = Craft::all();
+        $skills = Skill::all();
+        $topics = Topic::all();
+        $locations = Location::all();
+
+        return view('listings.index')
+                    ->with('listings', $listings)
+                    ->with('crafts', $crafts)
+                    ->with('skills', $skills)
+                    ->with('topics', $topics)
+                    ->with('locations', $locations);
     }
 
     public function create()

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-tagsinput.css') }}">
+@endsection
+
 @section('left')
 	@include('inc.filterListings')
 @endsection
@@ -67,4 +71,8 @@
 @endsection
 
 @section('right')
+@endsection
+
+@section('scripts')
+    @include('inc.tagging')
 @endsection
