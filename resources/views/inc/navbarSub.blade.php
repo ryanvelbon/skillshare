@@ -21,9 +21,17 @@
         <li class="{{Request::is('groups') ? 'active' : ''}}"><a href="/groups">Groups</a></li>
 
 
-        <form>
+        <form id="search-form" action="#" accept-charset="UTF-8" method="GET">
           <div id="search" class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="Search">
+
+            <!-- a JS script uses these hidden values to set the action of the form -->
+            <div id="action-for-explore" style="display: none;">#</div>
+            <div id="action-for-listings" style="display: none;">{{ action('ListingsController@search') }}</div>
+            <div id="action-for-members" style="display: none;">{{ action('UserProfilesController@search') }}</div>
+            <div id="action-for-groups" style="display: none;">#</div>
+            <div id="action-for-events" style="display: none;">#</div>
+
+            <input id="search_query" name="search_query" type="text" class="form-control" placeholder="Search">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <i class="glyphicon glyphicon-search"></i>
@@ -44,11 +52,9 @@
         </form>
 
 
-
-
         <a href="/listings/create" class="btn btn-primary navbar-btn" role="button">Add a Listing</a>
 
       </ul>
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
 </nav>

@@ -112,4 +112,13 @@ class UserProfilesController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search_query');
+
+        $result = User::where('username', 'LIKE', "%".$query."%")->get();
+        
+        return response()->json($result);
+    }
 }

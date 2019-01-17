@@ -51,26 +51,30 @@
     
     <script> //This script is specifically for subnavbar
         $(function(){
-            $("#search ul li").click(function(){
+            $("#search ul li").click(function(){                
 
                 $("#search .dropdown-toggle").text($(this).text());
-                // $("#search .dropdown-toggle").val($(this).text());
 
                 switch($(this).text()){
                     case "Explore":
                         placeholderText = "Search everything";
+                        $("#search-form").attr('action', $("#action-for-explore").html());
                         break;
                     case "Find Listings":
                         placeholderText = "Name or Description";
+                        $("#search-form").attr('action', $("#action-for-listings").html());
                         break;
                     case "Find Members":
                         placeholderText = "Name or Username";
+                        $("#search-form").attr('action', $("#action-for-members").html());
                         break;
                     case "Find Groups":
                         placeholderText = "Name or keyword";
+                        $("#search-form").attr('action', $("#action-for-groups").html());
                         break;
                     case "Find Events":
                         placeholderText = "Where?";
+                        $("#search-form").attr('action', $("#action-for-events").html());
                         break;
                 }
 

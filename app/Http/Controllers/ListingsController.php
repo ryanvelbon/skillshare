@@ -102,4 +102,13 @@ class ListingsController extends Controller
 
         return redirect('/dashboard')->with('success', 'Listing Removed');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search_query');
+
+        $result = Listing::where('title', 'LIKE', "%".$query."%")->get();
+        
+        return response()->json($result);
+    }
 }

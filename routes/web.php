@@ -29,7 +29,7 @@ Route::get('/dashboard', 'DashboardController@index');
 // Not secure. Malicious user can edit anyone's account
 // OLD: Route::get('/profiles/edit/{id}', 'UserProfilesController@edit');
 // Route::get('/profiles/{user}', ['as' => 'profiles.edit', 'uses' => 'UserProfilesController@edit']);
-Route::get('/profiles/edit', 'UserProfilesController@edit');
+
 
 
 
@@ -37,10 +37,10 @@ Route::get('/profiles/edit', 'UserProfilesController@edit');
 // Route::resource('/profiles', 'UserProfilesController');
 
 
-// Should method be PUT or POST?
+Route::get('/profiles/edit', 'UserProfilesController@edit');
 Route::put('/profiles/edit/submit', 'UserProfilesController@update');
-
-Route::get('/profiles/{id}', 'UserProfilesController@show');
+Route::get('/profiles/search', 'UserProfilesController@search')->name('profiles.search');
+Route::get('/profiles/{id}', 'UserProfilesController@show'); // careful with routing! This should be last route
 
 
 // Route::get('/preferences/account', '');
@@ -49,6 +49,8 @@ Route::get('/profiles/{id}', 'UserProfilesController@show');
 // Route::get('/members/search', '');
 Auth::routes();
 
+
+Route::get('listings/search', 'ListingsController@search')->name('listings.search');
 Route::resource('listings', 'ListingsController');
 
 
