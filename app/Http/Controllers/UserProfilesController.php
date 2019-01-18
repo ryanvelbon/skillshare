@@ -134,6 +134,39 @@ class UserProfilesController extends Controller
 
         $members = User::where('username', 'LIKE', "%".$query."%")->get();
 
-        return view('profiles.index')->with('members', $members);
+        return view('profiles.index')
+                    ->with('members', $members);
+    }
+
+    public function filteredSearch(Request $request)
+    {
+        // craft, location, topics, skills
+        
+        $location = $request->input('location');
+        if($location == "any"){ $location = null; }
+
+        $craft = $request->input('craft');
+        if($craft == "any"){ $craft = null; }
+
+
+        $profiles = DB::select(DB::raw("
+            SELECT * 
+            FROM user_profiles 
+            WHERE (? IS NULL OR location_id = ?)
+            AND (? IS NULL OR craft_id = ?)
+        "),[
+            $location, $location,
+            $craft, $craft,
+        ]);
+
+        $user_ids = [];
+
+        foreach($profiles as $profile){
+            array_push($user_ids, $profile->user_id);
+        }
+
+        // $users = User::find($user_ids);
+
+        return response()->json($users);
     }
 }

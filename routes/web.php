@@ -15,7 +15,7 @@ Route::get('/testing', function(){
 	return view('_test.profileShow');
 });
 
-// Route::get('/', 'ListingsController@index');
+Route::get('/', 'ListingsController@index');
 
 Route::get('/dashboard', 'DashboardController@index');
 
@@ -40,6 +40,7 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::get('/profiles/edit', 'UserProfilesController@edit');
 Route::put('/profiles/edit/submit', 'UserProfilesController@update');
 Route::get('/profiles/search', 'UserProfilesController@search')->name('profiles.search');
+Route::get('/profiles/filtered-search', 'UserProfilesController@filteredSearch')->name('profiles.filteredSearch');
 Route::get('/profiles/{id}', 'UserProfilesController@show'); // careful with routing! This should be last route
 Route::get('/profiles', 'UserProfilesController@index')->name('profiles.index');
 
