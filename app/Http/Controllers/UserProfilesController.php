@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 use App\User;
 use App\UserProfile;
@@ -15,11 +16,11 @@ use App\Location;
 
 use DB;
 
-use App\Helpers\Traits\Zoo;
+use App\Helpers\Traits\SearchRelevance;
 
 class UserProfilesController extends Controller
 {
-    use Zoo;
+    use SearchRelevance;
 
     public function __construct()
     {
@@ -110,17 +111,17 @@ class UserProfilesController extends Controller
 
         // save topics in topic_user pivot table
 
-        $topics_as_titles = explode(',', $request->input('topics'));
+        $topic_titles = explode(',', $request->input('topics'));
 
-        foreach($topics_as_titles as $topic_title){
+        foreach($topic_titles as $topic_title){
             $user->interests()->attach(Topic::where('title', $topic_title)->first()->id);
         }
 
         // save skills in skill_user pivot table
 
-        $skills_as_titles = explode(',', $request->input('skills'));
+        $skill_titles = explode(',', $request->input('skills'));
 
-        foreach($skills_as_titles as $skill_title){
+        foreach($skill_titles as $skill_title){
             $user->skills()->attach(Skill::where('title', $skill_title)->first()->id);
         }
 
@@ -144,8 +145,8 @@ class UserProfilesController extends Controller
 
     public function filteredSearch(Request $request)
     {
-        // craft, location, topics, skills
-        
+        $tagsGiven = $request->input('topics') || $request->input('skills');
+               
         $location = $request->input('location');
         if($location == "any"){ $location = null; }
 
@@ -171,8 +172,60 @@ class UserProfilesController extends Controller
 
         $users = User::find($user_ids);
 
-        $this->storeResultsWithRelevanceInTempTable($users);
+        if($tagsGiven)
+        {
+            $topic_ids = [];
+            $skill_ids = [];
 
-        return response()->json($users);
+            // Get requested topics as IDs.
+            if($request->input('topics')){
+                $topic_titles = explode(',', $request->input('topics'));
+
+                foreach($topic_titles as $topic_title){
+                    array_push($topic_ids, Topic::where('title', $topic_title)->first()->id);
+                }
+            }
+
+            // Get requested skills as IDs.
+            if($request->input('skills')){
+                $skill_titles = explode(',', $request->input('skills'));
+
+                foreach($skill_titles as $skill_title){
+                    array_push($skill_ids, Skill::where('title', $skill_title)->first()->id);
+                }
+            }
+
+            $tableName = $this->createAndSeedTemporaryTableResultsWithRevelance($user_ids, $topic_ids, $skill_ids);
+
+            $user_ids_by_revelance = DB::table($tableName)
+                                            ->where('relevance', '>=', 1)
+                                            ->orderBy('relevance', 'desc')
+                                            ->pluck('item_id');
+
+            Schema::dropIfExists($tableName);
+        
+
+            $users = []; // $users = User::find($user_ids_by_revelance); // Can't used this shortcut as sorting-by-relevance is lost. One alternative would be to join Users with the Temporary table so that the users can be sorted.
+            foreach($user_ids_by_revelance as $id){
+                array_push($users, User::find($id));
+            }
+        }
+
+        // return response()->json($users); // results can also be viewed like this.
+
+        // THIS IS ONLY TEMPORARY. THIS SHIT NEEDS TO BE CACHED
+
+        $user = auth()->user();
+        $crafts = Craft::all();
+        $skills = Skill::all();
+        $topics = Topic::all();
+        $locations = Location::all();
+        return view('profiles.index')
+                    ->with('members', $users)
+                    ->with('user', $user)
+                    ->with('crafts', $crafts)
+                    ->with('skills', $skills)
+                    ->with('topics', $topics)
+                    ->with('locations', $locations);
     }
 }

@@ -8,14 +8,14 @@ use Illuminate\Database\Migrations\Migration;
 
 use DB;
 
-trait Zoo {
+trait SearchRelevance {
 
 	/**
      * Calculate a search result's relevance score based on its matching tags count.
      *
-     * @param int     $item_id
-     * @param array   $topic_ids       topic tags applied in filtered search
-     * @param array   $skill_ids       skill tags applied in filtered search
+     * @param  int     $item_id
+     * @param  array   $topic_ids       topic tags applied in filtered search
+     * @param  array   $skill_ids       skill tags applied in filtered search
      * @return int
      */
 	private function calculateRelevance($item_id, $topic_ids, $skill_ids){
@@ -42,9 +42,17 @@ trait Zoo {
 		return $count;
 	}
 
-	public function storeResultsWithRelevanceInTempTable($results){
+	/**
+     *
+     *
+     * @param 
+     * @param 
+     * @param 
+     * @return string
+     */
+	public function createAndSeedTemporaryTableResultsWithRevelance($result_ids, $topic_ids, $skill_ids){
 
-		$tableName = '_temp_search_results_'.time();
+		$tableName = rand().'_search_'.time();
 
 		Schema::connection('mysql')->create($tableName, function($table){
 			$table->increments('id');
@@ -52,14 +60,11 @@ trait Zoo {
 			$table->tinyInteger('relevance');
 		});
 
-		// return $tableName;
-
-		$topic_ids = [1,2,3,4,5]; // dummy
-		$skill_ids = [1,2,3,4,5]; // dummy
-
-		foreach($results as $result){
-			$relevance = $this->calculateRelevance($result->id, $topic_ids, $skill_ids);
-			DB::table($tableName)->insert([ 'item_id' => $result->id, 'relevance' => $relevance ]);
+		foreach($result_ids as $result_id){
+			$relevance = $this->calculateRelevance($result_id, $topic_ids, $skill_ids);
+			DB::table($tableName)->insert([ 'item_id' => $result_id, 'relevance' => $relevance ]);
 		}
+
+		return $tableName;
 	}
 }
