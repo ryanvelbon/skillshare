@@ -15,8 +15,12 @@ use App\Location;
 
 use DB;
 
+use App\Helpers\Traits\Zoo;
+
 class UserProfilesController extends Controller
 {
+    use Zoo;
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
@@ -165,7 +169,9 @@ class UserProfilesController extends Controller
             array_push($user_ids, $profile->user_id);
         }
 
-        // $users = User::find($user_ids);
+        $users = User::find($user_ids);
+
+        $this->storeResultsWithRelevanceInTempTable($users);
 
         return response()->json($users);
     }
