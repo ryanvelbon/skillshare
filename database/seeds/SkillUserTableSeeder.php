@@ -8,14 +8,14 @@ class SkillUserTableSeeder extends Seeder
 {
     public function run()
     {
-        $skills = App\Skill::all();
-        $users = App\User::all();
+        $skills = App\Skill::orderBy('id')->get();
+        $users = App\User::orderBy('id')->get();
 
-        $entries = random_id_pairs($skills, $users);
+        $entries = random_id_pairs($users, $skills);
 
         foreach($entries as $entry){
         	DB::table('skill_user')->insert(
-        		['skill_id' => $entry[0], 'user_id' => $entry[1]]
+        		['user_id' => $entry[0], 'skill_id' => $entry[1]]
         	);
         }        
     }

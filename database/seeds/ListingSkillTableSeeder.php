@@ -8,8 +8,8 @@ class ListingSkillTableSeeder extends Seeder
 {
     public function run()
     {
-        $listings = App\Listing::all();
-        $skills = App\Skill::all();
+        $listings = App\Listing::orderBy('id')->get();
+        $skills = App\Skill::orderBy('id')->get();
 
         $entries = random_id_pairs($listings, $skills);
 

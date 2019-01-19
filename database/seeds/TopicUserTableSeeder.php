@@ -8,14 +8,14 @@ class TopicUserTableSeeder extends Seeder
 {
     public function run()
     {
-        $topics = App\Topic::all();
-        $users = App\User::all();
+        $topics = App\Topic::orderBy('id')->get();
+        $users = App\User::orderBy('id')->get();
 
-        $entries = random_id_pairs($topics, $users);
+        $entries = random_id_pairs($users, $topics);
 
         foreach($entries as $entry){
         	DB::table('topic_user')->insert(
-        		['topic_id' => $entry[0], 'user_id' => $entry[1]]
+        		['user_id' => $entry[0], 'topic_id' => $entry[1]]
         	);
         }        
     }

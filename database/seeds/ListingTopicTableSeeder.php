@@ -8,8 +8,8 @@ class ListingTopicTableSeeder extends Seeder
 {
     public function run()
     {
-        $listings = App\Listing::all();
-        $topics = App\Topic::all();
+        $listings = App\Listing::orderBy('id')->get();
+        $topics = App\Topic::orderBy('id')->get();
 
         $entries = random_id_pairs($listings, $topics);
 
