@@ -24,7 +24,7 @@ class UserProfilesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'filteredSearch']]);
     }
 
     public function index()
@@ -65,13 +65,13 @@ class UserProfilesController extends Controller
 
     public function edit()
     {
-        $user = auth()->user();
+        $profile = auth()->user()->profile;
         $crafts = Craft::all();
         $skills = Skill::all();
         $topics = Topic::all();
         $locations = Location::all();
         return view('profiles.edit')
-                    ->with('user', $user)
+                    ->with('profile', $profile)
                     ->with('crafts', $crafts)
                     ->with('skills', $skills)
                     ->with('topics', $topics)
@@ -215,14 +215,12 @@ class UserProfilesController extends Controller
 
         // THIS IS ONLY TEMPORARY. THIS SHIT NEEDS TO BE CACHED
 
-        $user = auth()->user();
         $crafts = Craft::all();
         $skills = Skill::all();
         $topics = Topic::all();
         $locations = Location::all();
         return view('profiles.index')
                     ->with('members', $users)
-                    ->with('user', $user)
                     ->with('crafts', $crafts)
                     ->with('skills', $skills)
                     ->with('topics', $topics)

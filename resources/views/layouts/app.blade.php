@@ -31,6 +31,7 @@
                 </div>
                 
                 <div class="col-md-6 col-lg-6">
+                    @include('inc.messages')
                     @yield('centre')
                 </div>
 

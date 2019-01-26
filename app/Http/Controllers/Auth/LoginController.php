@@ -25,7 +25,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/dashboard';
+
+    protected function redirectTo()
+    {
+        session()->flash('success', 'Successfully logged in.');
+        return '/dashboard';
+    }
 
     /**
      * Create a new controller instance.

@@ -35,6 +35,9 @@
                     </span>
                     <h4 class="mb-0">
                         <a class="text-dark" href="{{ url('/profiles', $member->id) }}">{{$member->username}}</a>
+                        <span class="text-secondary">
+                            {{App\Craft::find($member->profile->craft_id)->title}}
+                        </span>
                     </h4>
 
                     <img height="100" width="100" src="{{asset('storage/profilepics/').'/'.$member->profile->profile_pic}}">

@@ -16,7 +16,7 @@
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             	<label for="bday">Date of Birth</label>
-            	<input id="bday" name="bday" type="date">
+            	<input id="bday" name="bday" type="date" value="{{$profile->date_of_birth}}">
 
             	<label for="craft">Craft</label>
 				<select class="form-control" name="craft" id="craft">

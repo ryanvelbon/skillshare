@@ -20,6 +20,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3>{{ $user->username }}</h3>
+    <h3>{{ $user->profile->date_of_birth }}</h3>
 
 <div class="profile-header-container">
     <div class="profile-header-img">
@@ -34,10 +35,11 @@
 
 
 
-
-		@if(request()->route('id') == Auth::user()->id)
-			<a href="/profiles/edit" class="btn btn-primary navbar-btn" role="button">Edit Profile</a>
-		@endif
+    @if(Auth::check())
+      @if(request()->route('id') == Auth::user()->id)
+        <a href="/profiles/edit" class="btn btn-primary navbar-btn" role="button">Edit Profile</a>
+      @endif
+    @endif
 	</div>
 	<div class="panel-body">
 		
