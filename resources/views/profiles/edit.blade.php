@@ -11,12 +11,17 @@
 
 		<div class="panel-body">
 
-            <form method="post" action="{{ action('UserProfilesController@update') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form name="editForm" 
+            		method="post"
+            		action="{{ action('UserProfilesController@update') }}"
+            		onsubmit="return validateForm()" 
+            		accept-charset="UTF-8" 
+            		enctype="multipart/form-data">
 
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             	<label for="bday">Date of Birth</label>
-            	<input id="bday" name="bday" type="date" value="{{$profile->date_of_birth}}">
+            	<input id="bday" name="bday" type="date" value="{{$user->profile->date_of_birth}}">
 
             	<label for="craft">Craft</label>
 				<select class="form-control" name="craft" id="craft">
@@ -31,6 +36,9 @@
 						<option value="{{$location->id}}">{{$location->city}}</option>
 					@endforeach
 				</select>
+
+				<label for="bio">Write something about yourself</label>
+				<textarea class="form-control" type="textbox" name="bio" id="bio"></textarea>
 
 				<label for="topic-tags">What topics interest you?</label>
 				<input id="topic-tags" name="topics" type="text" value="" />
@@ -56,5 +64,49 @@
 
 @section('scripts')
 	@include('inc.tagging')
-@endsection
+	<script>
+		$(document).ready(function() {
+			$('#bio').val("{{$user->profile->bio}}");
 
+			var craftID = parseInt("{{ $user->profile->craft_id }}");
+		    $("#craft option").each(function(){
+		        if($(this).val() == craftID){
+		        	$(this).prop('selected',true);
+		        }
+		    });
+
+		    var locationID = parseInt("{{ $user->profile->location_id }}");
+		    $("#location option").each(function(){
+		        if($(this).val() == locationID){
+		        	$(this).prop('selected',true);
+		        }
+		    });
+
+
+			@foreach($user->interests as $interest)
+				$('#topic-tags').tagsinput('add', "{{$interest->title}}");
+			@endforeach
+
+			@foreach($user->skills as $skill)
+				$('#skill-tags').tagsinput('add', "{{$skill->title}}");
+			@endforeach
+
+		});
+
+
+		function validateForm() {
+			var bday = new Date(document.forms["editForm"]["bday"].value);
+
+			if (bday.setFullYear(bday.getFullYear()+18) >= new Date()) {
+				alert("You must be at least 18");
+				return false;
+			}
+
+			var bio = document.forms["editForm"]["bio"].value;
+			if (bio == "") {
+				alert("Bio must be filled out");
+				return false;
+			}
+		}
+	</script>
+@endsection

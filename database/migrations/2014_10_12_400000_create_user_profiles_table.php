@@ -24,6 +24,12 @@ class CreateUserProfilesTable extends Migration
             $table->foreign('location_id')->references('id')->on('locations');
 
             $table->string('profile_pic')->default('user.jpg');
+
+            $table->string('bio', 500)->nullable();
+
+            $table->boolean('complete')->default(false);
+
+            // If you make any changes to this schema, update the Controller's profileComplete() function
         });
     }
 

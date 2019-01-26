@@ -14,6 +14,8 @@ class UsersTableSeeder extends Seeder
     {
     	DB::table('users')->delete();
 
+        $faker = Faker\Factory::create();
+
         $users = factory(User::class, 50)->create();
 
         foreach($users as $user){
@@ -23,6 +25,7 @@ class UsersTableSeeder extends Seeder
                     'date_of_birth' => date('Y-m-d', rand(0500000000,1000000000)),
                     'location_id' => Location::inRandomOrder()->first()->id,
                     'craft_id' => Craft::inRandomOrder()->first()->id,
+                    'bio' => $faker->sentence($nbWords = 50, $variableNbWords = true),
                 )
             );
         }

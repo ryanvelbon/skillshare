@@ -27,6 +27,23 @@ class UserProfilesController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show', 'search', 'filteredSearch']]);
     }
 
+    function profileComplete($profile)
+    {
+        if($profile->date_of_birth === null){
+            return false;
+        }if($profile->craft_id === null){
+            return false;
+        }if($profile->location_id === null){
+            return false;
+        }if($profile->profile_pic == 'user.jpg'){
+            return false;
+        }if($profile->bio === null){
+            return false;
+        }
+
+        return true;
+    }
+
     public function index()
     {
         $members = User::all();
@@ -65,13 +82,13 @@ class UserProfilesController extends Controller
 
     public function edit()
     {
-        $profile = auth()->user()->profile;
+        $user = auth()->user();
         $crafts = Craft::all();
         $skills = Skill::all();
         $topics = Topic::all();
         $locations = Location::all();
         return view('profiles.edit')
-                    ->with('profile', $profile)
+                    ->with('user', $user)
                     ->with('crafts', $crafts)
                     ->with('skills', $skills)
                     ->with('topics', $topics)
@@ -101,6 +118,10 @@ class UserProfilesController extends Controller
         Storage::disk('public')->put('profilepics/'.$filename, file_get_contents($request->profile_pic), 'public');
 
         $profile->profile_pic = $filename;
+
+        $profile->bio = $request->input('bio');
+
+        $profile->complete = $this->profileComplete($profile);
 
         $profile->save();
 
