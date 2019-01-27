@@ -264,25 +264,4 @@ class UserProfilesController extends Controller
                     ->with('topics', $topics)
                     ->with('locations', $locations);
     }
-
-    public function getHints(Request $request)
-    {
-        $usernames = User::all()->pluck('username');
-
-        $q = $request->q;
-
-        $hints = array();
-
-        if($q !== "") {
-            $q = strtolower($q);
-            $len = strlen($q);
-            foreach($usernames as $username) {
-                if(stristr($q, substr($username, 0, $len))) {
-                    array_push($hints, $username);
-                }
-            }
-        }
-
-        return json_encode($hints);
-    }
 }

@@ -41,8 +41,8 @@
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <li><a href="#">Explore</a></li>
-                    <li><a href="#">Find Listings</a></li>
                     <li><a href="#">Find Members</a></li>
+                    <li><a href="#">Find Listings</a></li>
                     <li><a href="#">Find Groups</a></li>
                     <li><a href="#">Find Events</a></li>
                   </ul>

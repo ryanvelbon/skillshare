@@ -32,16 +32,15 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 
+Route::get('/search/hints/{table}/{q}', 'SearchController@getHints')->name('search.hints');
+
 
 //
 // Route::resource('/profiles', 'UserProfilesController');
-
-
 Route::get('/profiles/edit', 'UserProfilesController@edit');
 Route::put('/profiles/edit/submit', 'UserProfilesController@update');
 Route::get('/profiles/search', 'UserProfilesController@search')->name('profiles.search');
 Route::get('/profiles/filtered-search', 'UserProfilesController@filteredSearch')->name('profiles.filteredSearch');
-Route::get('/profiles/hints/{q}', 'UserProfilesController@getHints')->name('profiles.hints');
 Route::get('/profiles/{id}', 'UserProfilesController@show'); // careful with routing! This should be last route
 Route::get('/profiles', 'UserProfilesController@index')->name('profiles.index');
 

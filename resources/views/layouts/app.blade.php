@@ -52,6 +52,8 @@
 
     
     <script> //This script is specifically for subnavbar
+        var tableName = ""; // passed as url parameter so that server knows which table to query
+
         $(function(){
             $("#search ul li").click(function(){                
 
@@ -61,22 +63,27 @@
                     case "Explore":
                         placeholderText = "Search everything";
                         $("#search-form").attr('action', $("#action-for-explore").html());
-                        break;
-                    case "Find Listings":
-                        placeholderText = "Name or Description";
-                        $("#search-form").attr('action', $("#action-for-listings").html());
+                        tableName = ""
                         break;
                     case "Find Members":
                         placeholderText = "Name or Username";
                         $("#search-form").attr('action', $("#action-for-members").html());
+                        tableName = "users"
+                        break;
+                    case "Find Listings":
+                        placeholderText = "Name or Description";
+                        $("#search-form").attr('action', $("#action-for-listings").html());
+                        tableName = "listings";
                         break;
                     case "Find Groups":
                         placeholderText = "Name or keyword";
                         $("#search-form").attr('action', $("#action-for-groups").html());
+                        tableName = "groups"
                         break;
                     case "Find Events":
                         placeholderText = "Where?";
                         $("#search-form").attr('action', $("#action-for-events").html());
+                        tableName = "events"
                         break;
                 }
 
@@ -92,17 +99,20 @@
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if(this.readyState == 4 && this.status == 200) {
+
                         var hints = JSON.parse(this.responseText);
+                        document.getElementById("hintsArea").innerHTML = hints;
 
-                        document.getElementById("hintsArea").innerHTML = hints; // temporary
-
-                        // The search box's typeahead source is updated. But changes are only reflected after next keyUp
+                        // *PENDING* 
+                        // On every keyUp event, the search box's typeahead source is updated. But changes are only reflected after next keyUp
                         // $("#search_query").typeahead("destroy");
                         // $("#search_query").typeahead({ source: hints });
                     }
                 };
-                var url = '{{ route("profiles.hints", ":q") }}';
+                
+                var url = '{{ route("search.hints", ["q" => ":q", "table" => ":table"]) }}';
                 url = url.replace(':q', str);
+                url = url.replace(':table', tableName);
                 xmlhttp.open("GET", url, true);
                 xmlhttp.send();
             }
