@@ -1,5 +1,6 @@
 <script src="{{ asset('js/bootstrap-tagsinput.js') }}"></script>
-<script src="{{ asset('js/bootstrap3-typeahead.js') }}"></script>
+<!-- <script src="{{ asset('js/bootstrap3-typeahead.js') }}"></script> -->
+<!-- bootstrap3-typeahead.js is commented out here as it has instead been included in app.blade.php since the navbar also requires it. -->
 
 <script type="text/javascript">
 

@@ -47,6 +47,7 @@
     <!-- Scripts ------------------------------------>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap3-typeahead.js') }}"></script>
 
 
     
@@ -85,13 +86,19 @@
 
         function showHint(str) {
             if (str.length < 1) {
-                document.getElementById("hintsArea").innerHTML = "";
+                document.getElementById("hintsArea").innerHTML = ""; // temporary
                 return;
             } else {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if(this.readyState == 4 && this.status == 200) {
-                        document.getElementById("hintsArea").innerHTML = this.responseText;
+                        var hints = JSON.parse(this.responseText);
+
+                        document.getElementById("hintsArea").innerHTML = hints; // temporary
+
+                        // The search box's typeahead source is updated. But changes are only reflected after next keyUp
+                        // $("#search_query").typeahead("destroy");
+                        // $("#search_query").typeahead({ source: hints });
                     }
                 };
                 var url = '{{ route("profiles.hints", ":q") }}';
@@ -100,6 +107,7 @@
                 xmlhttp.send();
             }
         }
+
     </script>
 
     @yield('scripts')

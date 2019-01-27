@@ -271,22 +271,18 @@ class UserProfilesController extends Controller
 
         $q = $request->q;
 
-        $hint = "";
+        $hints = array();
 
         if($q !== "") {
             $q = strtolower($q);
             $len = strlen($q);
             foreach($usernames as $username) {
                 if(stristr($q, substr($username, 0, $len))) {
-                    if($hint === "") {
-                        $hint = $username;
-                    }else{
-                        $hint .= ", $username";
-                    }
+                    array_push($hints, $username);
                 }
             }
         }
 
-        return $hint === "" ? "no suggestion" : $hint;
+        return json_encode($hints);
     }
 }
