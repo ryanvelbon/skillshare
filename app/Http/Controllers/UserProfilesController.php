@@ -24,7 +24,7 @@ class UserProfilesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'filteredSearch']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'filteredSearch', 'getHints']]);
     }
 
     function profileComplete($profile)
@@ -77,7 +77,14 @@ class UserProfilesController extends Controller
     {
         $user = User::with('profile')->findOrFail($id);
 
-        return view('profiles.show', compact('user'));
+        $dob = new \DateTime($user->profile->date_of_birth);
+        $today = new \DateTime();
+        $age = $today->diff($dob)->y;
+
+        // return view('profiles.show', compact('user'));
+        return view('profiles.show')
+                    ->with('user', $user)
+                    ->with('age', $age);
     }
 
     public function edit()
@@ -160,8 +167,18 @@ class UserProfilesController extends Controller
 
         $members = User::where('username', 'LIKE', "%".$query."%")->get();
 
+        // BUG: Not DRY!
+        $crafts = Craft::all();
+        $skills = Skill::all();
+        $topics = Topic::all();
+        $locations = Location::all();
+
         return view('profiles.index')
-                    ->with('members', $members);
+                    ->with('members', $members)
+                    ->with('crafts', $crafts)
+                    ->with('skills', $skills)
+                    ->with('topics', $topics)
+                    ->with('locations', $locations);
     }
 
     public function filteredSearch(Request $request)
@@ -246,5 +263,30 @@ class UserProfilesController extends Controller
                     ->with('skills', $skills)
                     ->with('topics', $topics)
                     ->with('locations', $locations);
+    }
+
+    public function getHints(Request $request)
+    {
+        $usernames = User::all()->pluck('username');
+
+        $q = $request->q;
+
+        $hint = "";
+
+        if($q !== "") {
+            $q = strtolower($q);
+            $len = strlen($q);
+            foreach($usernames as $username) {
+                if(stristr($q, substr($username, 0, $len))) {
+                    if($hint === "") {
+                        $hint = $username;
+                    }else{
+                        $hint .= ", $username";
+                    }
+                }
+            }
+        }
+
+        return $hint === "" ? "no suggestion" : $hint;
     }
 }

@@ -1,3 +1,8 @@
+<script>
+  
+</script>
+
+
 <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
@@ -17,10 +22,8 @@
         <li class="{{Request::is('groups') ? 'active' : ''}}"><a href="/groups">Groups</a></li>
         <li class="{{Request::is('events') ? 'active' : ''}}"><a href="/events">Events</a></li>     
       
-
         <form id="search-form" action="#" accept-charset="UTF-8" method="GET">
           <div id="search" class="input-group input-group-lg">
-
             <!-- a JS script uses these hidden values to set the action of the form -->
             <div id="action-for-explore" style="display: none;">#</div>
             <div id="action-for-listings" style="display: none;">{{ action('ListingsController@search') }}</div>
@@ -28,7 +31,8 @@
             <div id="action-for-groups" style="display: none;">#</div>
             <div id="action-for-events" style="display: none;">#</div>
 
-            <input id="search_query" name="search_query" type="text" class="form-control" placeholder="Search">
+            <label id="hintsArea" for="search_query"></label>
+            <input id="search_query" name="search_query" type="text" class="form-control" autocomplete="off" placeholder="Search" onkeyup="showHint(this.value)">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <i class="glyphicon glyphicon-search"></i>

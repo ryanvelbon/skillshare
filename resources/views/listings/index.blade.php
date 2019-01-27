@@ -74,5 +74,5 @@
 @endsection
 
 @section('scripts')
-    @include('inc.tagging')
+    {{-- @include('inc.tagging') --}}
 @endsection

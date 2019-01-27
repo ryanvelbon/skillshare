@@ -82,9 +82,25 @@
                 $("#search input").attr('placeholder', placeholderText);
             });
         });
+
+        function showHint(str) {
+            if (str.length < 1) {
+                document.getElementById("hintsArea").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        document.getElementById("hintsArea").innerHTML = this.responseText;
+                    }
+                };
+                var url = '{{ route("profiles.hints", ":q") }}';
+                url = url.replace(':q', str);
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+        }
     </script>
-
-
 
     @yield('scripts')
 

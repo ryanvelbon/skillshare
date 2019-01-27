@@ -3,7 +3,7 @@
 @section('left')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>Tags</h3>
+        <h3>Skills & Interests</h3>
     </div>
     <div class="panel-body">
         @foreach($user->interests as $interest)
@@ -20,7 +20,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3>{{ $user->username }}</h3>
-    <h3>{{ $user->profile->date_of_birth }}</h3>
+    Age: {{$age}}
 
 <div class="profile-header-container">
     <div class="profile-header-img">
@@ -58,9 +58,13 @@
 		<div class="tab-content">
             <div id="menu1_goo" class="tab-pane fade in active">
               <h3>Listings</h3>
-              @foreach($user->listings as $listing)
-              	<li><a href="/listings/{{ $listing->id }}">{{$listing->title}}</a></li>
-              @endforeach
+              @if(count($user->listings) > 0)
+                @foreach($user->listings as $listing)
+                  <li><a href="/listings/{{ $listing->id }}">{{$listing->title}}</a></li>
+                @endforeach
+              @else
+                User hasn't posted any listings yet.
+              @endif
             </div>
             <div id="menu2_goo" class="tab-pane fade">
               <h3>Groups</h3>
@@ -84,4 +88,22 @@
 		
 	</div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://connect.soundcloud.com/sdk/sdk-3.3.1.js"></script>
+<script>
+SC.initialize({
+  client_id: 'YOUR_CLIENT_ID'
+});
+
+// stream track id 293
+SC.stream('/tracks/293').then(function(player){
+  player.play().then(function(){
+    console.log('Playback started!');
+  }).catch(function(e){
+    console.error('Playback rejected. Try calling play() from a user interaction.', e);
+    });
+});
+</script>
 @endsection
